@@ -1,16 +1,17 @@
 package com.elca.service.impl;
 
 import com.elca.constant.Constant;
-import com.elca.enumType.FileExtensionType;
-import com.elca.exception.FileExtensionUnformatted;
 import com.elca.entity.Company;
+import com.elca.enumType.FileExtensionType;
+import com.elca.exception.FileExtensionNotSupported;
+import com.elca.exception.FileExtensionNotValid;
+import com.elca.fileReaderRepo.FileExtension;
+import com.elca.fileReaderRepo.factory.FileExtensionFactory;
 import com.elca.service.ICompanyService;
-import com.elca.utils.FileExtension;
-import com.elca.utils.factory.FileExtensionFactory;
-import java.util.ArrayList;
+import com.elca.util.ValidateFileUtils;
+
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class CompanyService implements ICompanyService {
@@ -30,49 +31,36 @@ public class CompanyService implements ICompanyService {
     }
 
     @Override
-    public List<Company> findAllFromCSV(){
+    public List<Company> findAll() throws FileExtensionNotValid, FileExtensionNotSupported{
 
-        List<Company> companies = new ArrayList<>();
+        List<Company> companies;
 
-        FileExtension csvReader = null;
+        FileExtension reader;
 
-        try {
-            csvReader = FileExtensionFactory.getFileExtension(FileExtensionType.CSV);
-            companies = csvReader.readFile(Constant.csvFilePath);
+        String filePath = Constant.filePath;
 
-        }catch (FileExtensionUnformatted fileUnformatted) {
-            System.out.println(fileUnformatted.getMessage());
-        } finally {
-            return companies;
+        if (!ValidateFileUtils.isCorrectFilePath(filePath)){
+            throw new FileExtensionNotValid("This file path: "+filePath+ " is not valid");
         }
-    }
 
-    @Override
-    public List<Company> findAllFromXLSX(){
+        if (ValidateFileUtils.isCSVFileExtension(filePath)){
 
-        List<Company> companies = new ArrayList<>();
+            reader = FileExtensionFactory.getFileExtension(FileExtensionType.CSV);
+            companies = reader.readFile(filePath);
 
-        FileExtension xlsxReader = null;
+        }else if (ValidateFileUtils.isExcelFile(filePath)){
 
-        try {
-            xlsxReader = FileExtensionFactory.getFileExtension(FileExtensionType.CSV);
-            companies = xlsxReader.readFile(Constant.csvFilePath);
+            reader = FileExtensionFactory.getFileExtension(FileExtensionType.EXCEL);
+            companies = reader.readFile(filePath);
 
-        }catch (FileExtensionUnformatted fileUnformatted) {
-            System.out.println(fileUnformatted.getMessage());
-        } finally {
-            return companies;
+        }else{
+            throw new FileExtensionNotSupported("This file extension is not supported");
         }
+
+        return companies;
     }
 
-    @Override
-    public List<Company> findAll(String path) {
-
-        List<Company> companies = new ArrayList<>();
-
-        return null;
-    }
-
+    /* Return total capital of headquarters in CH*/
     @Override
     public Double totalCapital() {
 
@@ -80,29 +68,40 @@ public class CompanyService implements ICompanyService {
 
         List<Company> companies = null;
 
-        companies = this.findAllFromCSV();
+        try {
+            companies = this.findAll();
 
-        companies = companies.stream()
-                .filter(item -> item.isHeadQuarter() != null)
-                .filter(item -> item.isHeadQuarter())
-                .filter(item -> item.getCountry().equals("CH")).collect(Collectors.toList());
+            companies = companies.stream()
+                    .filter(item -> item.isHeadQuarter() != null)
+                    .filter(Company::isHeadQuarter)
+                    .filter(item -> item.getCountry().equals("CH")).collect(Collectors.toList());
 
-        for(Company company: companies){
-            sumCap += company.getCapital();
+            for(Company company: companies){
+                sumCap += company.getCapital();
+            }
+
+        } catch (FileExtensionNotValid | FileExtensionNotSupported fileException) {
+            System.out.println(fileException.getMessage());
         }
 
         return sumCap;
     }
 
+    /* Print out the names of the companies which are located in CH sort by name (DESC)*/
     @Override
     public void filterAndPrint() {
         List<Company> companies = null;
 
-        companies = this.findAllFromCSV();
+        try {
+            companies = this.findAll();
 
-        companies.stream()
-                .filter(item -> item.getCountry().equals("CH"))
-                .sorted(Comparator.comparing(Company::getName).reversed())
-                .forEach(c -> System.out.println(c.getName()));
+            companies.stream()
+                    .filter(item -> item.getCountry().equals("CH"))
+                    .sorted(Comparator.comparing(Company::getName).reversed())
+                    .forEach(c -> System.out.println(c.getName()));
+
+        } catch (FileExtensionNotValid | FileExtensionNotSupported fileException) {
+            System.out.println(fileException.getMessage());
+        }
     }
 }

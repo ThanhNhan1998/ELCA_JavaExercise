@@ -1,18 +1,4 @@
 
-P
-java:S1143."5Remove this return statement from this finally block.(‡©¿êıÿÿÿÿ
-P
-java:S1143@"5Remove this return statement from this finally block.(‡©¿êıÿÿÿÿ
-H
-java:S1128"-Remove this unused import 'java.util.Locale'.(åğ×±ûÿÿÿÿ
-S	java:S106,"9Replace this use of System.out or System.err by a logger.(ûúåÿÿÿÿÿ
-S	java:S106>"9Replace this use of System.out or System.err by a logger.(ûúåÿÿÿÿÿ
-X
-java:S1854G"=Remove this useless assignment to local variable "companies".(€òŒñøÿÿÿÿ
-A
-java:S1168I"+Return an empty collection instead of null.(¥¹ï
-G
-java:S1612W",Replace this lambda with a method reference.(ûÜĞÛûÿÿÿÿ
-S	java:S106j"9Replace this use of System.out or System.err by a logger.(’¸¡´ıÿÿÿÿ
-I
-java:S1481G".Remove this unused "companies" local variable.(€òŒñøÿÿÿÿ
+N	java:S106T"9Replace this use of System.out or System.err by a logger.(èˆ‰Ò
+S	java:S106e"9Replace this use of System.out or System.err by a logger.(’¸¡´ıÿÿÿÿ
+N	java:S106h"9Replace this use of System.out or System.err by a logger.(èˆ‰Ò
