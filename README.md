@@ -1,3 +1,3 @@
-# Foobar
+# Config
 
-Foobar is a Python library for dealing with word pluralization.
+Please edit filePath and watchedDir in Constant.class
