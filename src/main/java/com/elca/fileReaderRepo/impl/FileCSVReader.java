@@ -14,7 +14,7 @@ public class FileCSVReader implements FileExtension {
     @Override
     public List<Company> readFile(String path){
 
-        List<Company> companies = new ArrayList<>();
+        List companies = new ArrayList<>();
         FileReader fileReader = null;
 
         try{

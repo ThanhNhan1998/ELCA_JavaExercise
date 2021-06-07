@@ -67,8 +67,8 @@ public class FileExcelReader implements FileExtension {
 
                     switch (colIndex){
                         case COLUMN_INDEX_ID:
-                            Double id = Double.parseDouble(String.valueOf(cellValue));
-                            company.setId(id.longValue());
+                            double id = (double)cellValue;
+                            company.setId((long)id);
                             break;
                         case COLUMN_INDEX_NAME:
                             company.setName(String.valueOf(cellValue));
@@ -83,9 +83,7 @@ public class FileExcelReader implements FileExtension {
                             company.setCountry(String.valueOf(cellValue));
                             break;
                         case COLUMN_INDEX_HEADQUARTER:
-                            Double isHeadQuarter = Double.parseDouble(String.valueOf(cellValue));
-
-                            company.setHeadQuarter(isHeadQuarter == 1.0);
+                            company.setHeadQuarter((double)cellValue == 1.0);
                             break;
                         default:
                             break;
@@ -93,8 +91,6 @@ public class FileExcelReader implements FileExtension {
                 }
                 companies.add(company);
             }
-
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
