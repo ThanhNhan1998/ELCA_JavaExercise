@@ -1,0 +1,26 @@
+
+D
+java:S37401"/Provide the parametrized type for this generic.(üŒ³K
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÄÔÈ±8Ü‰ë/
+O
+java:S5993"9Change the visibility of this constructor to "protected".(±˜Â£
+E
+java:S2093."*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+A
+java:S1172F"+Remove this unused method parameter "path".(òŠ‹ñ
+S
+java:S1854G"=Remove this useless assignment to local variable "listBooks".(ƒÌÉğ
+W
+java:S1854L"<Remove this useless assignment to local variable "workbook".(ËªâÀÿÿÿÿÿ
+A
+java:S1168S"+Return an empty collection instead of null.(¥¹ï
+R
+java:S1854["<Remove this useless assignment to local variable "workbook".(Ë¢Óõ
+W
+java:S1854]"<Remove this useless assignment to local variable "workbook".(¯®éˆùÿÿÿÿ
+H
+java:S1481L"-Remove this unused "workbook" local variable.(ËªâÀÿÿÿÿÿ
+D
+java:S1481G".Remove this unused "listBooks" local variable.(ƒÌÉğ
+B
+java:S1481W"-Remove this unused "workbook" local variable.(Ö¾

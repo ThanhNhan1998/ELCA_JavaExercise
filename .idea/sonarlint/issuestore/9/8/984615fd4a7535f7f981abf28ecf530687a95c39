@@ -1,0 +1,15 @@
+
+Q
+java:S1143€"5Remove this return statement from this finally block.(‡©¿êýÿÿÿÿ
+\
+java:S22593"FA "NullPointerException" could be thrown; "workbook" is nullable here.(å¸…Ø
+h
+java:S3776)"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(“ïä
+[
+java:S2147m"ECombine this catch with the one at line 107, which has the same body.(ï­£Ä
+x
+java:S4970m"bRemove or refactor this catch clause because it is unreachable as hidden by previous catch blocks.(ï­£Ä
+>
+java:S1125a"(Remove the unnecessary boolean literals.(€¯Þú
+E
+java:S2093."*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
